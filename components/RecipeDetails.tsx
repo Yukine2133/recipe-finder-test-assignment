@@ -1,9 +1,9 @@
-import Image from "next/image";
-import { getRecipeDetails } from "@/lib/api";
-import { Clock, Users } from "lucide-react";
+import Image from 'next/image'
+import { getRecipeDetails } from '@/lib/api'
+import { Clock, Users } from 'lucide-react'
 
 export async function RecipeDetails({ id }: { id: string }) {
-  const recipe = await getRecipeDetails(id);
+  const recipe = await getRecipeDetails(id)
 
   return (
     <div className="bg-gray-800 rounded-lg shadow-lg overflow-hidden">
@@ -19,9 +19,7 @@ export async function RecipeDetails({ id }: { id: string }) {
       </div>
 
       <div className="p-6">
-        <h1 className="text-3xl font-bold text-purple-400 mb-4">
-          {recipe.title}
-        </h1>
+        <h1 className="text-3xl font-bold text-purple-400 mb-4">{recipe.title}</h1>
 
         <div className="flex flex-wrap gap-4 mb-6">
           {recipe.readyInMinutes && (
@@ -63,9 +61,7 @@ export async function RecipeDetails({ id }: { id: string }) {
 
         {recipe.instructions && (
           <div>
-            <h2 className="text-xl font-semibold mb-3 text-white">
-              Instructions
-            </h2>
+            <h2 className="text-xl font-semibold mb-3 text-white">Instructions</h2>
             <div
               className="text-gray-300 prose prose-sm prose-invert max-w-none"
               dangerouslySetInnerHTML={{ __html: recipe.instructions }}
@@ -74,5 +70,5 @@ export async function RecipeDetails({ id }: { id: string }) {
         )}
       </div>
     </div>
-  );
+  )
 }
