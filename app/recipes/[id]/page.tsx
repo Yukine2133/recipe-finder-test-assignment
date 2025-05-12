@@ -1,14 +1,10 @@
-import { Suspense } from "react";
-import Link from "next/link";
-import { RecipeDetailsSkeleton } from "@/components/RecipeDetailsSkeleton";
-import { RecipeDetails } from "@/components/RecipeDetails";
-
-export default async function RecipeDetailsPage({
-  params,
-}: {
-  params: { id: string };
-}) {
-  const { id } = await params;
+import { Suspense } from 'react'
+import Link from 'next/link'
+import { RecipeDetailsSkeleton } from '@/components/RecipeDetailsSkeleton'
+import { RecipeDetails } from '@/components/RecipeDetails'
+type Params = Promise<{ id: string }>
+export default async function RecipeDetailsPage({ params }: { params: Params }) {
+  const { id } = await params
   return (
     <main className="min-h-screen bg-gray-900 text-white">
       <div className="container mx-auto px-4 py-12">
@@ -24,5 +20,5 @@ export default async function RecipeDetailsPage({
         </Suspense>
       </div>
     </main>
-  );
+  )
 }

@@ -1,15 +1,12 @@
-import Link from "next/link";
-import Image from "next/image";
-import { getRecipes } from "@/lib/api";
-import type { SearchParamsType } from "@/lib/types";
+import Link from 'next/link'
+import Image from 'next/image'
+import { getRecipes } from '@/lib/api'
+import type { SearchParamsType } from '@/lib/types'
+import { searchParamsTypePromise } from '@/app/recipes/page'
 
-export async function RecipeList({
-  searchParams,
-}: {
-  searchParams: SearchParamsType;
-}) {
-  const { query, cuisine, maxReadyTime } = await searchParams;
-  const recipes = await getRecipes(query, cuisine, maxReadyTime);
+export async function RecipeList({ searchParams }: { searchParams: searchParamsTypePromise }) {
+  const { query, cuisine, maxReadyTime } = (await searchParams) as SearchParamsType
+  const recipes = await getRecipes(query, cuisine, maxReadyTime)
 
   if (recipes.length === 0) {
     return (
@@ -23,7 +20,7 @@ export async function RecipeList({
           Back to Search
         </Link>
       </div>
-    );
+    )
   }
 
   return (
@@ -55,9 +52,7 @@ export async function RecipeList({
               />
             </div>
             <div className="p-4">
-              <h2 className="text-lg font-semibold text-white line-clamp-2">
-                {recipe.title}
-              </h2>
+              <h2 className="text-lg font-semibold text-white line-clamp-2">{recipe.title}</h2>
               {recipe.readyInMinutes && (
                 <p className="mt-2 text-sm text-gray-400">
                   Ready in {recipe.readyInMinutes} minutes
@@ -68,5 +63,5 @@ export async function RecipeList({
         ))}
       </div>
     </div>
-  );
+  )
 }
